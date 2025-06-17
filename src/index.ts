@@ -66,15 +66,17 @@ export class MyMCP extends McpAgent {
 			}
 		);
 
-		this.server.tool(
+this.server.tool(
   "get_product_price",
   "Devuelve el precio de un producto dado su nombre.",
   { name: z.string() },
   async ({ name }) => {
+    name = name.trim().toLowerCase();
+
     const mockPrices: Record<string, number> = {
-      "iPhone 14": 1200,
-      "MacBook Pro": 2500,
-      "Samsung Galaxy S23": 1100,
+      "iphone 14": 1200,
+      "macbook pro": 2500,
+      "samsung galaxy s23": 1100,
     };
 
     const price = mockPrices[name] ?? null;
@@ -82,22 +84,25 @@ export class MyMCP extends McpAgent {
       content: [
         {
           type: "text",
-          text: price ? `El precio del ${name} es $${price}` : `No se encontró el precio para "${name}"`,
+          text: price
+            ? `el precio del ${name} es $${price}`
+            : `no se encontró el precio para "${name}"`,
         },
       ],
     };
   }
 );
-
 this.server.tool(
   "get_product_stock",
   "Devuelve el stock disponible de un producto dado su nombre.",
   { name: z.string() },
   async ({ name }) => {
+    name = name.trim().toLowerCase();
+
     const mockStock: Record<string, number> = {
-      "iPhone 14": 5,
-      "MacBook Pro": 2,
-      "Samsung Galaxy S23": 10,
+      "iphone 14": 5,
+      "macbook pro": 2,
+      "samsung galaxy s23": 10,
     };
 
     const stock = mockStock[name] ?? null;
@@ -105,12 +110,15 @@ this.server.tool(
       content: [
         {
           type: "text",
-          text: stock !== null ? `Hay ${stock} unidades disponibles del ${name}` : `No se encontró stock para "${name}"`,
+          text: stock !== null
+            ? `hay ${stock} unidades disponibles del ${name}`
+            : `no se encontró stock para "${name}"`,
         },
       ],
     };
   }
 );
+
 
 	}
 }
