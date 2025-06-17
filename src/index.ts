@@ -29,7 +29,7 @@ export class MyMCP extends McpAgent {
 				b: z.number(),
 			},
 			async ({ operation, a, b },context) => {
-				console.log("🔐 Token recibido:", context?.token);
+				// console.log("🔐 Token recibido:", context?.token);
 				return {
 					content: [
 					  {
