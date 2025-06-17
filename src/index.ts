@@ -65,7 +65,7 @@ export class MyMCP extends McpAgent {
 				return { content: [{ type: "text", text: String(result) }] };
 			}
 		);
-
+//  product price
 this.server.tool(
   "get_product_price",
   "Devuelve el precio de un producto dado su nombre.",
@@ -92,6 +92,7 @@ this.server.tool(
     };
   }
 );
+// produc stock
 this.server.tool(
   "get_product_stock",
   "Devuelve el stock disponible de un producto dado su nombre.",
