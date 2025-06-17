@@ -28,7 +28,16 @@ export class MyMCP extends McpAgent {
 				a: z.number(),
 				b: z.number(),
 			},
-			async ({ operation, a, b }) => {
+			async ({ operation, a, b },context) => {
+				console.log("🔐 Token recibido:", context?.token);
+				return {
+					content: [
+					  {
+						type: "text",
+						text: "❌ Token inválido o faltante. No estás autorizado para usar esta herramienta.",
+					  },
+					],
+				  };
 				let result: number;
 				switch (operation) {
 					case "add":
