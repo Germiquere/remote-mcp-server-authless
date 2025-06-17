@@ -56,6 +56,53 @@ export class MyMCP extends McpAgent {
 				return { content: [{ type: "text", text: String(result) }] };
 			}
 		);
+
+		this.server.tool(
+  "get_product_price",
+  "Devuelve el precio de un producto dado su nombre.",
+  { name: z.string() },
+  async ({ name }) => {
+    const mockPrices: Record<string, number> = {
+      "iPhone 14": 1200,
+      "MacBook Pro": 2500,
+      "Samsung Galaxy S23": 1100,
+    };
+
+    const price = mockPrices[name] ?? null;
+    return {
+      content: [
+        {
+          type: "text",
+          text: price ? `El precio del ${name} es $${price}` : `No se encontró el precio para "${name}"`,
+        },
+      ],
+    };
+  }
+);
+
+this.server.tool(
+  "get_product_stock",
+  "Devuelve el stock disponible de un producto dado su nombre.",
+  { name: z.string() },
+  async ({ name }) => {
+    const mockStock: Record<string, number> = {
+      "iPhone 14": 5,
+      "MacBook Pro": 2,
+      "Samsung Galaxy S23": 10,
+    };
+
+    const stock = mockStock[name] ?? null;
+    return {
+      content: [
+        {
+          type: "text",
+          text: stock !== null ? `Hay ${stock} unidades disponibles del ${name}` : `No se encontró stock para "${name}"`,
+        },
+      ],
+    };
+  }
+);
+
 	}
 }
 
